@@ -3493,6 +3493,7 @@
             slidesPerView: 1,
             spaceBetween: 0,
             speed: 800,
+            loop: true,
             pagination: {
                 el: ".partners__pagination",
                 clickable: true

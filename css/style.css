@@ -1,7 +1,21 @@
 @font-face {
   font-family: SourceSans3;
   font-display: swap;
+  src: url(../fonts/SourceSans3-Italic-VariableFont_wght.woff2) format("woff2");
+  font-weight: 400;
+  font-style: italic
+}
+@font-face {
+  font-family: SourceSans3;
+  font-display: swap;
   src: url(../fonts/SourceSans3-VariableFont_wght.woff2) format("woff2");
+  font-weight: 400;
+  font-style: normal
+}
+@font-face {
+  font-family: Unbounded;
+  font-display: swap;
+  src: url(../fonts/Unbounded-VariableFont_wght.woff2) format("woff2");
   font-weight: 400;
   font-style: normal
 }
@@ -166,18 +180,24 @@ textarea.input {
   }
 }
 .menu__body {
-  display: flex;
-  flex-direction: column
+  display: grid;
+  grid-template-columns: 43.5% 1fr 40%
+}
+@media (max-width:61.99875em) {
+  .menu__body {
+    display: flex;
+    flex-direction: column
+  }
 }
 @media (min-width:61.99875em) {
   .menu__body {
-    flex-direction: row;
     align-items: center
   }
 }
 @media (max-width:1460px) and (min-width:61.99875em) {
   .menu__body {
-    justify-content: center
+    justify-content: center;
+    grid-template-columns: 40% 1fr 40%
   }
 }
 @media (max-width:61.99875em) {
@@ -222,30 +242,40 @@ textarea.input {
 }
 @media (min-width:106.25em) {
   .menu__list {
-    gap: 3.125rem
+    gap: 2.5rem
   }
 }
 @media (min-width:48em) and (max-width:106.25em) {
-  @supports (gap:clamp(1.25rem ,-0.2950643777rem + 3.2188841202vw ,3.125rem)) {
+  @supports (gap:clamp(0.9375rem ,-0.3500536481rem + 2.6824034335vw ,2.5rem)) {
     .menu__list {
-      gap: clamp(1.25rem ,-.2950643777rem + 3.2188841202vw ,3.125rem)
+      gap: clamp(.9375rem ,-.3500536481rem + 2.6824034335vw ,2.5rem)
     }
   }
-  @supports not (gap:clamp(1.25rem ,-0.2950643777rem + 3.2188841202vw ,3.125rem)) {
+  @supports not (gap:clamp(0.9375rem ,-0.3500536481rem + 2.6824034335vw ,2.5rem)) {
     .menu__list {
-      gap: calc(1.25rem + 1.875 * (100vw - 48rem)/ 58.25)
+      gap: calc(.9375rem + 1.5625 * (100vw - 48rem)/ 58.25)
     }
   }
 }
 @media (max-width:48em) {
   .menu__list {
-    gap: 1.25rem
+    gap: .9375rem
   }
 }
 @media (max-width:61.99875em) {
   .menu__list {
     flex-direction: column;
     row-gap: 25px
+  }
+}
+@media (min-width:1460px) {
+  .menu__list_two {
+    justify-content: center
+  }
+}
+@media (max-width:1460px) and (min-width:61.99875em) {
+  .menu__list_two {
+    justify-content: flex-end
   }
 }
 .menu__link {
@@ -304,7 +334,7 @@ textarea.input {
 @media (max-width:61.99875em) {
   .icon-menu {
     display: block;
-    position: relative;
+    position: absolute;
     width: 3.125rem;
     height: 1.75rem;
     z-index: 5
@@ -448,7 +478,7 @@ h2[class*=__title]::after {
 }
 .link {
   display: inline-block;
-  background: linear-gradient(90deg,#00982a 0,#78c16d 35%);
+  background: url(../img/partners/button-bg.webp) 0 0/cover no-repeat;
   padding: 20px .9375rem;
   color: #fff;
   font-size: 24px;
@@ -471,6 +501,7 @@ h2[class*=__title]::after {
 .header__container {
   max-width: 1700px;
   grid-template-columns: auto auto 150px auto;
+  grid-template-columns: 15% auto 10% 10%;
   align-items: center
 }
 @media (min-width:61.99875em) {
@@ -481,14 +512,14 @@ h2[class*=__title]::after {
 @media (max-width:1460px) and (min-width:61.99875em) {
   .header__container {
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    justify-items: center
+    grid-template-rows: 1fr 1fr
   }
 }
 .header__link {
   font-size: 22px;
   color: #fff;
-  transition: color .3s
+  transition: color .3s;
+  white-space: nowrap
 }
 ._dark .header__link {
   color: #366
@@ -515,6 +546,14 @@ h2[class*=__title]::after {
     font-size: 1.375rem
   }
 }
+.header__link_email {
+  font-weight: 600
+}
+@media (min-width:61.99875em) {
+  .header__link_tel {
+    margin-left: auto
+  }
+}
 @media (max-width:1460px) {
   .header__menu {
     grid-row: 1/2;
@@ -522,13 +561,11 @@ h2[class*=__title]::after {
     justify-items: center
   }
 }
+.header__logo {
+  margin-inline: auto
+}
 ._dark .header__logo svg g path:not(.not-color) {
   fill: #366
-}
-@media (min-width:61.99875em) {
-  .header__logo {
-    margin: 0 3.125rem
-  }
 }
 @media (max-width:61.99875em) {
   .header__logo {
@@ -726,6 +763,7 @@ h2[class*=__title]::after {
   background-color: #00b240
 }
 .footer__text {
+  font-family: Unbounded;
   color: #fff;
   font-size: 24px;
   margin-top: 65px
@@ -757,6 +795,17 @@ h2[class*=__title]::after {
   place-items: center;
   position: relative
 }
+.page__main::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .53;
+  z-index: -1;
+  background-color: #000
+}
 .main__container {
   position: absolute;
   bottom: 5%
@@ -767,9 +816,31 @@ h2[class*=__title]::after {
   text-align: center;
   line-height: 1.4
 }
-@media (max-width:29.99875em) {
+@media (max-width:47.99875em) and (min-width:48em) {
   .main__title {
-    font-size: 32px
+    font-size: 2.5rem
+  }
+}
+@media (max-width:47.99875em) and (min-width:22.5em) and (max-width:48em) {
+  @supports (font-size:clamp(1.75rem ,1.0882352941rem + 2.9411764706vw ,2.5rem)) {
+    .main__title {
+      font-size: clamp(1.75rem ,1.0882352941rem + 2.9411764706vw ,2.5rem)
+    }
+  }
+  @supports not (font-size:clamp(1.75rem ,1.0882352941rem + 2.9411764706vw ,2.5rem)) {
+    .main__title {
+      font-size: calc(1.75rem + .75 * (100vw - 22.5rem)/ 25.5)
+    }
+  }
+}
+@media (max-width:47.99875em) and (max-width:22.5em) {
+  .main__title {
+    font-size: 1.75rem
+  }
+}
+@media (max-width:700px) {
+  .main__title {
+    margin-top: -150px
   }
 }
 .main__advantages {
@@ -1085,12 +1156,12 @@ h2[class*=__title]::after {
   position: relative
 }
 .services__img {
-  width: 50%;
+  width: 85px;
   margin-inline: auto
 }
 @media (max-width:47.99875em) {
   .services__img {
-    width: 60%;
+    width: 30%;
     margin-inline: auto
   }
 }
@@ -1432,6 +1503,9 @@ h2[class*=__title]::after {
 }
 .news__time {
   color: #00b240
+}
+.news__data {
+  font-style: italic
 }
 .swiper {
   overflow: hidden
